@@ -1,40 +1,57 @@
-let cardData = [];
-const key = "45e54304d8f7124ac68b86b0f647f527";
-fetch("https://dog.ceo/api/breed/hound/images")
-            .then(response => {
-                if (!response.ok) {
-                    console.log ("Fetching Failed");
-                }
-                return response.json();
-            })
-            .then(response_j => {
-                cardData = response_j.message;
-                console.log(cardData);
-                createCards(cardData);
-            })
-            .catch(error => {
-                console.error(error);
-            })
+const key = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWU1NDMwNGQ4ZjcxMjRhYzY4Yjg2YjBmNjQ3ZjUyNyIsInN1YiI6IjY2MTI3ZDE1YzY4YjY5MDE3ZDA1YzhiOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oxN6UtSD6XP0x07RZDkXCCC8tjOal2RR6FwZTsMscC8';
+const imgURL = "https://image.tmdb.org/t/p/w500";
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer ' + key,
+  }
+};
+
+function fetchData() {
+    const container = document.getElementById('card-container');
+    container.innerHTML = "";
+    let query = document.getElementById("searchBox").value;
+    console.log("maalik");
+    for (let i = 1; i <= 6; i++) {
+        let cardData = [];
+        const apiPopularURL = "https://api.themoviedb.org/3/movie/popular?language=en-US&page="+i;
+        fetch(apiPopularURL, options)
+        .then(response => response.json())
+        .then(response => {
+            cardData = response.results;
+            filterData = [];
+            if (query != "") {
+                filterData = cardData.filter(card => card.genre_ids.includes(Number(query)));
+            } else {
+                filterData = cardData;
+            }
+            console.log(filterData);
+            createCards(filterData);
+        })
+        .catch(err => console.error(err));
+    }    
+}
+
 
 function createCards(data) {
     const container = document.getElementById('card-container');
-    let doggy = 0;
     data.forEach(card => {
-        doggy += 1;
         const cardElement = document.createElement('div');
         cardElement.classList.add('card');
-        cardElement.style.backgroundImage = "url("+card+")";
+        cardElement.style.backgroundImage = "url("+imgURL+card.poster_path+")";
 
         const cardContent = document.createElement('div');
         cardContent.classList.add('card-content');
 
         const titleElement = document.createElement('h2');
         titleElement.classList.add('poppins-bold');
-        titleElement.textContent = "Doggy #" + doggy;
+        titleElement.textContent = card.original_title;
 
-        const contentElement = document.createElement('p');
+        const contentElement = document.createElement('div');
         contentElement.classList.add('poppins-medium');
-        contentElement.textContent = card;
+        contentElement.classList.add('content-overview');
+        contentElement.textContent = card.overview;
 
         cardElement.appendChild(cardContent);
         cardContent.appendChild(titleElement);
@@ -44,3 +61,4 @@ function createCards(data) {
     });
 }
 
+fetchData(14);

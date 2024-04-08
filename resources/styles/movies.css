@@ -37,6 +37,12 @@
     justify-content : center;
 }
 
+.content-overview {
+    height : 100px;
+    overflow : hidden;
+    overflow-y : auto;
+}
+
 .poppins-thin {
   font-family: "Poppins", sans-serif;
   font-weight: 100;
