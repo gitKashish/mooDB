@@ -1,7 +1,100 @@
-.video-container {
-    width : 60%;
-}
-
 body {
     display: flex;
+    flex-direction: column;
 }
+
+.video-container {
+    position : absolute;
+    left : 0;
+    top : 0;
+    z-index: -1;
+    overflow: hidden;
+    object-fit: fill;
+    height : 100%;
+    width : 100%;
+}
+
+.video-container video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position : absolute;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tint {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgb(19, 19, 19), transparent, 30%, black);
+}
+
+.title {
+    align-self: center;
+    height: auto;
+    font-size: 20vw;
+    color : white;
+    mix-blend-mode:soft-light   ;
+    margin-top: 40;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 80vw;
+    position: absolute;
+    margin-bottom: 7%;
+    margin-left: 20px;
+    margin-right: 20px;
+    bottom: 0;
+    height: auto;
+    align-self: center;
+    justify-content:center;
+    column-gap: 10vw;
+    row-gap : 20px;
+}
+
+.buttons input {
+    padding: 8;
+    height: 4rem;
+    width: 8rem;
+    border-width: 1;
+    opacity: 0.8;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.buttons input:hover {
+    color: rgb(0, 0, 0);
+    transform: scale(1.05);
+    box-shadow: rgb(176, 176, 176) 0px 0px 10px;
+    background-color: rgb(248, 248, 248);
+    opacity: 0.5;
+}
+
+.rajdhani-light {
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .rajdhani-regular {
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .rajdhani-medium {
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  
