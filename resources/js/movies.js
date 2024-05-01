@@ -1,64 +1,49 @@
-const key = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWU1NDMwNGQ4ZjcxMjRhYzY4Yjg2YjBmNjQ3ZjUyNyIsInN1YiI6IjY2MTI3ZDE1YzY4YjY5MDE3ZDA1YzhiOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oxN6UtSD6XP0x07RZDkXCCC8tjOal2RR6FwZTsMscC8';
-const imgURL = "https://image.tmdb.org/t/p/w500";
-const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer ' + key,
-  }
-};
-
-function fetchData() {
-    const container = document.getElementById('card-container');
-    container.innerHTML = "";
-    let query = document.getElementById("searchBox").value;
-    console.log("maalik");
-    for (let i = 1; i <= 6; i++) {
-        let cardData = [];
-        const apiPopularURL = "https://api.themoviedb.org/3/movie/popular?language=en-US&page="+i;
-        fetch(apiPopularURL, options)
+let genre_list;
+let list = [];
+function fetch_genre() {
+    const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWU1NDMwNGQ4ZjcxMjRhYzY4Yjg2YjBmNjQ3ZjUyNyIsInN1YiI6IjY2MTI3ZDE1YzY4YjY5MDE3ZDA1YzhiOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oxN6UtSD6XP0x07RZDkXCCC8tjOal2RR6FwZTsMscC8'
+        }
+      };
+      let result = fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', options)
         .then(response => response.json())
         .then(response => {
-            cardData = response.results;
-            filterData = [];
-            if (query != "") {
-                filterData = cardData.filter(card => card.genre_ids.includes(Number(query)));
-            } else {
-                filterData = cardData;
-            }
-            console.log(filterData);
-            createCards(filterData);
+            genre_list = response.genres;
+            load_list(genre_list);
         })
         .catch(err => console.error(err));
-    }    
 }
 
+async function fetch_movie() {
+    const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWU1NDMwNGQ4ZjcxMjRhYzY4Yjg2YjBmNjQ3ZjUyNyIsInN1YiI6IjY2MTI3ZDE1YzY4YjY5MDE3ZDA1YzhiOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oxN6UtSD6XP0x07RZDkXCCC8tjOal2RR6FwZTsMscC8'
+        }
+      };
+      let page = 20;
+      for (let i = 1; i <= page; i++) {
+        await fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page='+i+'&region=356', options)
+        .then(response => response.json())
+        .then(response => {
+          list = list.concat(response.results);
+        })
+        .catch(err => console.error(err));
+      }
+}
 
-function createCards(data) {
-    const container = document.getElementById('card-container');
-    data.forEach(card => {
-        const cardElement = document.createElement('div');
-        cardElement.classList.add('card');
-        cardElement.style.backgroundImage = "url("+imgURL+card.poster_path+")";
-
-        const cardContent = document.createElement('div');
-        cardContent.classList.add('card-content');
-
-        const titleElement = document.createElement('h2');
-        titleElement.classList.add('poppins-bold');
-        titleElement.textContent = card.original_title;
-
-        const contentElement = document.createElement('div');
-        contentElement.classList.add('poppins-medium');
-        contentElement.classList.add('content-overview');
-        contentElement.textContent = card.overview;
-
-        cardElement.appendChild(cardContent);
-        cardContent.appendChild(titleElement);
-        cardContent.appendChild(contentElement);
-
-        container.appendChild(cardElement);
+function load_list(list) {
+    const data_list = document.getElementById("genre-list");
+    let options_string = "";
+    list.forEach(element => {
+        options_string += '<option value = "' + element.name + '"/>';
     });
+    data_list.innerHTML = options_string;
 }
 
-fetchData(14);
+fetch_genre();
+fetch_movie();
