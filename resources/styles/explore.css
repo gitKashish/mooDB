@@ -2,17 +2,36 @@
     display:flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 10px;
+    width: 100%;
+    /* border-radius: 10px;
     border-style: solid;
     border-width: 5px;
-    border-color:black;
-    gap: 10px; 
+    border-color:black; */
+    /* gap: 10px;  */
+}
+
+.hero-banner{
+    width: 90vw;
+    height: 65vh;
+    background-size : cover;
+    position: relative;
+}
+.hero-poster-info{
+    display: flex;
+}
+
+.hero-poster-info img{
+    /* width: 50%; */
+    height: 40%;
+}
+.hero-poster img{
+    border: 3px solid white;
 }
 
 .card-container{
     scroll-snap-align: center;
     display: flex;
-    width: 70vw;
+    /* width: 89vw; */
     scroll-behavior: smooth;
     overflow: auto;
     scroll-snap-type: x mandatory;
@@ -35,10 +54,17 @@
     width: 240px;
     height: 360px;
 }
+.card-hero{
+    padding-top: 5;
+    padding-bottom: 5;
+    padding-left: 5;
+    padding-right: 5;
+    width: 533px;
+    height: 300px;
+}
 
 .card-element{
     display : flex;
-    border-radius : 10px;
     background-size : cover;
     background-position : center;
     background-repeat : no-repeat;
@@ -47,9 +73,23 @@
 }
 
 .card-element:hover {
-    box-shadow: rgba(100, 100, 111, 0.9) 0px 7px 20px 0px;
+    box-shadow: rgba(100, 100, 111, 0.9) 0px 0px 12px 6px;
     transform : scale(1.05);
 }
+
+.card-hero-element{
+    display : flex;
+    background-size : cover;
+    background-position : center;
+    background-repeat : no-repeat;
+    cursor: pointer;
+    transition : all 0.3s ease-in-out;
+}
+
+.card-hero-element:hover {
+    transform : scale(1.02);
+}
+
 .gradient-div{
     display : flex;
     flex-direction : column;
@@ -66,6 +106,33 @@
 .gradient-div:hover{
     opacity: 1;
 }
+.gradient-hero-div{
+    display : flex;
+    flex-direction : column;
+    justify-content : flex-end;
+    border-radius : 10px;
+    font-weight : bold;
+    width: 200px;
+    height: 300px;
+    background-image : linear-gradient(transparent 60%, black);
+    opacity: 0;
+    transition: opacity 0.3s linear;
+}
+.gradient-hero-div:hover{
+    opacity: 1;
+}
+.gradient-banner{
+    display : flex;
+    flex-direction : column;
+    border-radius : 10px;
+    font-weight : bold;
+    position: inherit;
+    width: 90vw;
+    height: 65vh;
+    opacity:0;
+    background-image : linear-gradient(to right, black , transparent 60%);
+}
+
 .title-element{
     padding-left: 10px;
     color :white;
@@ -74,13 +141,18 @@
     font-style: normal;
 }
 .carousel-container{
-    width: 100%;
-    height: 100vh;
+    width: 98vw;
+    /* height: 100vh; */
     display: flex;
     flex-direction : column;
     justify-content: center;
     align-items: center;
     background-color: white;
+}
+.carousel-heading{
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
 }
 .arrow{
     padding-left: 10px;
@@ -88,4 +160,22 @@
     height: 40px;
     cursor: pointer;
 }
+.selected-container{
+    height: 65vh;
+    display : flex;
+    width: 90vw;
+    align-items: center;
+}
+.selecteddiv{
+    width: 90vw;
+    height: 65vh;
+    display : flex;
+    background-size : cover;
+    background-position : center;
+    background-repeat : no-repeat;
+    justify-content: end;
+}
 
+.hero-poster-info{
+    padding: 10px;
+}

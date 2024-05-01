@@ -1,17 +1,42 @@
 <html>
     <head>
-        <title>home</title>
+        <title>Explore</title>
         <link rel="stylesheet" href="./resources/styles/explore.css">
         <script src="resources/js/explore.js"></script>
     </head>
     <body>
-        <div class="carousel-container">
-            <h1>Trending Movies</h1>
-            <div class="carousel">
-                <input type="image" id="prev-btn" class="arrow" src="resources/images/left-arrow.png">
-                <div id="card-container" class="card-container">
+        <div class="hero-carousel-container">
+            
+            <div class="carousel-container">
+                <div id="selected-container" class="hero-banner">
+                    <div class="gradient-banner">
+                    <div class="hero-poster-info">
+                        <div class ="hero-poster">
+                            <img id="hero-poster" src="">
+                        </div>
+                        <div class ="hero-info"></div>
+                    </div>
+                    <div class="hero-title-desc">
+                        <div class="hero-title"></div>
+                        <div class="hero-desc"></div>
+                    </div>
+                    </div>
+                    <!-- <img id="hero-banner-img" src="" alt="">     -->
                 </div>
-                <input type="image" id="next-btn" class="arrow" src="resources/images/right-arrow.png">
+                <div class="carousel">
+                    <input type="image" id="hero-prev-btn" class="arrow" src="resources/images/left-arrow.png">
+                    <div id="hero-card-container" class="card-container"></div>
+                    <input type="image" id="hero-next-btn" class="arrow" src="resources/images/right-arrow.png">
+                </div>
+            </div>
+        </div>
+        <div class="carousel-container">
+            <h1 class="carousel-heading">Trending Movies</h1>
+            <div class="carousel">
+                <input type="image" id="trend-mo-prev-btn" class="arrow" src="resources/images/left-arrow.png">
+                <div id="trend-mo-card-container" class="card-container">
+                </div>
+                <input type="image" id="trend-mo-next-btn" class="arrow" src="resources/images/right-arrow.png">
             </div>
         </div>
     </body>
